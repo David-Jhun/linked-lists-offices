@@ -1,8 +1,6 @@
 package model;
 
-import java.util.Comparator;
-
-public class Professor implements Comparator<Professor>{
+public class Professor{
 
 	private String name;
 	private String id;
@@ -20,10 +18,4 @@ public class Professor implements Comparator<Professor>{
 		return id;
 	}
 
-	@Override
-	public int compare(Professor arg0, Professor arg1) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
 }

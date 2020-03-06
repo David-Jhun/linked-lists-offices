@@ -67,7 +67,10 @@ public class Department {
 	}
 	
 	public void removeEvenFloors() {
-		
+		Office temp = null;
+		if( Integer.parseInt(firstOffice.getCode()) % 2 == 0 ) {
+			
+		}
 	}
 	
 }
