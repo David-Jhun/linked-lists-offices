@@ -51,10 +51,24 @@ public class Department {
 		boolean removed = false;
 		if( firstOffice.getNextOffice() == null && firstOffice.getCode().equals(c) ) {
 			firstOffice = null;
+			removed = true;
 		}else if( firstOffice.getNextOffice() != null && firstOffice.getCode().equals(c) ) {
 			firstOffice = firstOffice.getNextOffice();
+			removed = true;
 		}else {
-			
+			Office previous = null;
+			Office current = firstOffice;
+			while( current.getNextOffice() != null && !(current.getCode().equals(c)) ) {
+				previous = current;
+				current = current.getNextOffice();
+			}
+			if( current.getNextOffice() != null && current.getCode().equals(c) ) {
+				previous.setNextOffice(current.getNextOffice());
+				removed = true;
+			}else if( current.getNextOffice() == null && current.getCode().equals(c) ) {
+				previous.setNextOffice(null);
+				removed = true;
+			}
 		}
 		return removed;
 	}
