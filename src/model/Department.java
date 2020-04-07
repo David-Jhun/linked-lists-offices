@@ -10,17 +10,27 @@ public class Department {
 		firstOffice = null;
 	}
 	
-	public void addOffice( String c, int f ) {
-		Office of = new Office( c, f );
-		Office temp = null;
+	public void addOfficeFirst( String c, int f ) {
+		Office newOffiece = new Office( c, f );
 		if( firstOffice == null ) {
-			firstOffice = of;
+			firstOffice = newOffiece;
 		}else {
-			temp = firstOffice;
-			while( temp.getNextOffice() != null ) {
-				temp = temp.getNextOffice();
+			Office first = firstOffice;
+			newOffiece.setNextOffice(first);
+			firstOffice = newOffiece;
+		}
+	}
+	
+	public void addOfficeLast( String c, int f ) {
+		Office newOffice = new Office( c, f );
+		if( firstOffice == null ) {
+			firstOffice = newOffice;
+		}else {
+			Office temporal = firstOffice;
+			while( temporal.getNextOffice() != null ) {
+				temporal = temporal.getNextOffice();
 			}
-			temp.setNextOffice(of);
+			temporal.setNextOffice(newOffice);
 		}
 	}
 	
@@ -37,18 +47,16 @@ public class Department {
 		return temp;
 	}
 	
-	public Office removeOffice( String c ) {
-		Office previous = null;
-		Office current = null;
-		if( firstOffice.getCode().equals(c) ) {
+	public boolean removeOffice( String c ) {
+		boolean removed = false;
+		if( firstOffice.getNextOffice() == null && firstOffice.getCode().equals(c) ) {
+			firstOffice = null;
+		}else if( firstOffice.getNextOffice() != null && firstOffice.getCode().equals(c) ) {
 			firstOffice = firstOffice.getNextOffice();
 		}else {
-			current = firstOffice;
-			while( current.getNextOffice() != null && !( current.getCode().equals(c) ) ) {
-				
-			}
+			
 		}
-		return current;
+		return removed;
 	}
 	
 	public void sortByCode() {
