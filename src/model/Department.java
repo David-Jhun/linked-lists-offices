@@ -89,9 +89,29 @@ public class Department {
 	}
 	
 	public void removeEvenFloors() {
-		Office temp = null;
-		if( Integer.parseInt(firstOffice.getCode()) % 2 == 0 ) {
-			
+		if( firstOffice != null ) {
+			if( ( firstOffice.getFloor() % 2 ) == 0 ) {
+				if( firstOffice.getNextOffice() == null ) {
+					firstOffice = null;
+				}else {
+					firstOffice = firstOffice.getNextOffice();
+				}
+			}
+			Office previous = null;
+			Office current = firstOffice;
+			do {
+				if( previous != null ) {
+					if( ( current.getFloor() % 2 ) == 0 ) {
+						if( current.getNextOffice() == null ) {
+							previous.setNextOffice(null);
+						}else {
+							previous.setNextOffice(current.getNextOffice());
+						}
+					}
+				}
+				previous = current;
+				current = current.getNextOffice();
+			}while( current != null );
 		}
 	}
 	
