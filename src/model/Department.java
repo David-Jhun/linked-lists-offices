@@ -21,6 +21,27 @@ public class Department {
 		}
 	}
 	
+	public void addOfficeSorted( String c, int f ) {
+		Office newOne = new Office( c, f );
+		if( firstOffice == null ) {
+			firstOffice = newOne;
+		}else if( firstOffice.compareTo( newOne ) < 0 && firstOffice.getNextOffice() == null ){
+			firstOffice.setNextOffice(newOne);
+		}else if( firstOffice.compareTo( newOne ) < 0 && firstOffice.getNextOffice() != null ){
+			Office next = firstOffice.getNextOffice();
+			if( newOne.compareTo(next) < 0 ) {
+				firstOffice.setNextOffice(newOne);
+				newOne.setNextOffice(next);
+			}else {
+				addOfficeLast(c, f);
+			}
+		}else if( firstOffice.compareTo( newOne ) > 0 ) {
+			Office first = firstOffice;
+			newOne.setNextOffice(first);
+			firstOffice = newOne;
+		}
+	}
+	
 	public void addOfficeLast( String c, int f ) {
 		Office newOffice = new Office( c, f );
 		if( firstOffice == null ) {
@@ -86,6 +107,18 @@ public class Department {
 			}
 		}
 		
+	}
+	
+	public String showOffices() {
+		String n = "";
+		if( firstOffice != null ) {
+			Office temporal = firstOffice;
+			while( temporal != null ) {
+				n += "\n" + temporal;
+				temporal = temporal.getNextOffice();
+			}
+		}
+		return n;
 	}
 	
 	public void removeEvenFloors() {
